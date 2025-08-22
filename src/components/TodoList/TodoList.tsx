@@ -1,7 +1,12 @@
 import React from 'react';
 import { Todo } from '../../types/Todo';
 
-export const TodoList: React.FC<Todo> = ({ todos, onSelect }) => {
+interface TodoListProps {
+  todos: Todo[];
+  onSelect: (todo: Todo) => void;
+}
+
+export const TodoList: React.FC<TodoListProps> = ({ todos, onSelect }) => {
   if (todos.length === 0) {
     return <div className="notification is-info">No todos found</div>;
   }
@@ -63,3 +68,5 @@ export const TodoList: React.FC<Todo> = ({ todos, onSelect }) => {
     </table>
   );
 };
+
+export default TodoList;

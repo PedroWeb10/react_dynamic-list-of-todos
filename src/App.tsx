@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
+import React, { useEffect, useState } from 'react';
 import { TodoList } from './components/TodoList';
 import { TodoFilter } from './components/TodoFilter';
 import { TodoModal } from './components/TodoModal';
@@ -72,7 +72,9 @@ export const App: React.FC = () => {
 
             <div className="block">
               <TodoFilter
+                status={statusFilter}
                 onStatusChange={handleStatusFilter}
+                query={query}
                 onQueryChange={handleQuery}
                 onReset={handleClearQuery}
               />
@@ -82,7 +84,7 @@ export const App: React.FC = () => {
               {isLoading ? (
                 <Loader />
               ) : (
-                <TodoList todos={filteredTodos} onShowTodo={handleShowTodo} />
+                <TodoList todos={filteredTodos} onSelect={handleShowTodo} />
               )}
             </div>
           </div>

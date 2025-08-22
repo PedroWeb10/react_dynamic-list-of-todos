@@ -1,7 +1,14 @@
 import React from 'react';
-import { Todo } from '../../types/Todo';
 
-export const TodoFilter: React.FC<Todo> = ({
+interface TodoFilterProps {
+  statusFilter: string;
+  onStatusFilter: (status: string) => void;
+  query: string;
+  onQueryChange: (query: string) => void;
+  onClearQuery: () => void;
+}
+
+export const TodoFilter: React.FC<TodoFilterProps> = ({
   statusFilter,
   onStatusFilter,
   query,
@@ -22,7 +29,8 @@ export const TodoFilter: React.FC<Todo> = ({
           </select>
         </span>
       </p>
-      <p className="control is-expanded">
+
+      <p className="control is-expanded has-icons-left has-icons-right">
         <input
           className="input"
           type="text"
@@ -30,17 +38,24 @@ export const TodoFilter: React.FC<Todo> = ({
           value={query}
           onChange={e => onQueryChange(e.target.value)}
         />
-      </p>
+        <span className="icon is-left">
+          <i className="fas fa-magnifying-glass" />
+        </span>
+        <span
+          className="icon is-right"
+          style={{ pointerEvents: 'all' }}
+          onClick={onClearQuery}
+        >
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
 
-      {query && (
-        <p className="control">
-          <button className="button is-danger" onClick={onClearQuery}>
-            <span className="icon">
-              <i className="fas fa-times" />
-            </span>
-          </button>
-        </p>
-      )}
+          <button
+            data-cy="clearSearchButton"
+            onClick={onClearQuery}
+            className="delete"
+            type="button"
+          />
+        </span>
+      </p>
     </div>
   );
 };
